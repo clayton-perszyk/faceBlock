@@ -7,7 +7,7 @@ After visiting FaceBook 3 times, FaceBlock will display a message that you have 
 
 ## What problem does it solve?
 
-FaceBook can be a productivity killer, if visited to frequently. FaceBlock helps to prevent users
+FaceBook can be a productivity killer, if visited to frequently. FaceBlock helps too prevent users
 from visiting FaceBook too frequently.
 
 ## Who has this problem?
