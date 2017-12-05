@@ -1,15 +1,14 @@
-## FaceBlock
+## LimitMe
 
-## What is FaceBlock?
+## What is LimitMe?
 
-FaceBlock is a chrome extension that limits the number of times you can visit FaceBook each day.
-After visiting FaceBook 3 times, FaceBlock will display a message that you have reached your limit.
+LimitMe is a chrome extension that limits the number of times you can visit websites each day.
+After visiting a website a user defined number of times, LimitMe will display a message that you have reached your limit for viewing for that day.
 
 ## What problem does it solve?
 
-FaceBook can be a productivity killer, if visited to frequently. FaceBlock helps to prevent users
-from visiting FaceBook too frequently.
+Visiting websites that are not part of your work can be a productivity killer, if visited to frequently or habitually. LimitMe helps to prevent users from visiting websites too frequently.
 
 ## Who has this problem?
 
-Anyone who finds themselves habitually visiting FaceBook, leading to lost productivity.
+Anyone who finds themselves habitually visiting certain websites, leading to lost productivity.
