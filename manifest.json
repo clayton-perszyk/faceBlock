@@ -10,5 +10,10 @@
     "default_popup": "main_popup.html"
   },
 
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+
   "options_page": "options_popup.html"
 }
