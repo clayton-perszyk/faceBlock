@@ -7,14 +7,19 @@ $(document).ready(function(){
       $main = $("#primary-content")
       $secondary = $("#secondary-content");
 
+  $main.hide();
+  $secondary.hide();
+
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
     tab = tabs[0];
     site = ('lm-' + getDomain(tab.url));
 
     chrome.storage.sync.get(site, function(items) {
       if (items[site]) {
+        $main.hide();
         $secondary.show();
       } else {
+        $secondary.hide();
         $main.show();
       }
     });
