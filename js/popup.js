@@ -4,17 +4,19 @@ $(document).ready(function(){
       limit,
       icon,
       storageObj,
+      currentDate,
       $main = $("#primary-content")
       $secondary = $("#secondary-content");
 
   $main.hide();
   $secondary.hide();
 
-  chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
     tab = tabs[0];
     site = ('lm-' + getDomain(tab.url));
 
-    chrome.storage.sync.get(site, function(items) {
+    chrome.storage.sync.get(site, function(items) {;
       if (items[site]) {
         $main.hide();
         $secondary.show();
@@ -25,12 +27,13 @@ $(document).ready(function(){
     });
 
     $('#save').on('click', function() {
-      limit = $('#limit').val();
+      limit = parseInt($('#limit').val());
       icon = tab.favIconUrl;
       storageObj = {};
-      storageObj[site] = {'limit': limit, 'icon': icon, 'date': new Date().toDateString()};
-
+      storageObj[site] = {limit: limit, views: 0, icon: icon, date: new Date().toDateString()};
       chrome.storage.sync.set(storageObj);
+      $main.hide();
+      $secondary.show();
     });
   });
 });

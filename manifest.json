@@ -10,6 +10,11 @@
     "default_popup": "popups/main_popup.html"
   },
 
+  "background": {
+    "scripts": ["js/eventsPage.js", "js/utilities.js"],
+    "persistent": false
+  },
+
   "permissions": [
     "storage",
     "tabs"
