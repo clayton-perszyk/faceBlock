@@ -3,6 +3,7 @@ function updateData() {
       site,
       storedDate,
       currentDate,
+      notificationOptions,
       updatedStorage = {};
 
   // chrome.storage.sync.clear();
@@ -16,14 +17,26 @@ function updateData() {
         currentDate = new Date().toDateString();
         storedDate = items[site].date;
 
+        console.log(items[site])
+
         if (currentDate === storedDate) {
           items[site].views++;
           updatedStorage[site] = {limit: items[site].limit, views: items[site].views, icon: items[site].icon, date: items[site].date};
           chrome.storage.sync.set(updatedStorage);
+
           if (items[site].views >= items[site].limit) {
-            alert("reached yo limit");
+            // alert("reached yo limit");
           } else {
-            alert("you have " + (items[site].limit - items[site].views)+ " views left.");
+            notificationOptions = {
+              type: "basic",
+              title: "Views updated!",
+              message: "you have " + (items[site].limit - items[site].views)+ " views left today for " + getDomain(tab.url) + ".",
+              iconUrl: "../temp_logo.png"
+            };
+
+            chrome.notifications.create("upadted site views", notificationOptions, function(notificationId) {
+              chrome.notifications.clear(notificationId); 
+            });
           }
         } else {
           updatedStorage[site] = {limit: items[site].limit, views: 0, icon: items[site].icon, date: new Date().toDateString()};
