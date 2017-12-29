@@ -50,15 +50,14 @@ chrome.tabs.onUpdated.addListener(function(tabId, info, tab) {
   }
 });
 
-chrome.tabs.onCreated.addListener(function(tab) {
+chrome.tabs.onCreated.addListener(function() {
   updateData();
 });
 
-chrome.tabs.onActivated.addListener(function(object, activeInfo) {
+chrome.tabs.onActivated.addListener(function() {
   updateData();
 });
 
-chrome.windows.onFocusChanged.addListener(function(window) {
-  console.log(window)
+chrome.windows.onFocusChanged.addListener(function() {
   updateData();
 });
