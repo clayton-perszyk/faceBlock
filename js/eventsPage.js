@@ -25,16 +25,22 @@ function updateData() {
           if (items[site].views >= items[site].limit) {
             // alert("reached yo limit");
           } else {
-            notificationOptions = {
-              type: "basic",
-              title: "Views updated!",
-              message: "you have " + (items[site].limit - items[site].views)+ " views left today for " + getDomain(tab.url) + ".",
-              iconUrl: "../temp_logo.png"
-            };
+            chrome.permissions.contains({ permissions: ['notifications']}, function(result) {
+                if (result) {
+                  notificationOptions = {
+                    type: "basic",
+                    title: "Views updated!",
+                    message: "you have " + (items[site].limit - items[site].views)+ " views left today for " + getDomain(tab.url) + ".",
+                    iconUrl: "../temp_logo.png",
+                    buttons: [{title: "Disable Notifications"}]
+                  };
 
-            chrome.notifications.create("updated site views", notificationOptions, function(notificationId) {
-              chrome.notifications.clear(notificationId);
+                  chrome.notifications.create("updated site views", notificationOptions, function(notificationId) {
+                    chrome.notifications.clear(notificationId);
+                  });
+                }
             });
+
           }
         } else {
           updatedStorage[site] = {limit: items[site].limit, views: 0, icon: items[site].icon, date: new Date().toDateString()};
@@ -45,7 +51,7 @@ function updateData() {
 }
 
 chrome.tabs.onUpdated.addListener(function(tabId, info, tab) {
-  if (info.status === "complete") {
+  if (info.status === "complete" && tabId) {
     updateData();
   }
 });
@@ -62,4 +68,14 @@ chrome.windows.onFocusChanged.addListener(function(browserWindow) {
   if (browserWindow != chrome.windows.WINDOW_ID_NONE) {
     updateData();
   }
+});
+
+chrome.permissions.contains({ permissions: ['notifications']}, function(result) {
+    if (result) {
+      chrome.notifications.onButtonClicked.addListener(function(){
+        chrome.permissions.remove({
+              permissions: ['notifications'],
+            }, function(removed) {});
+      });
+    }
 });

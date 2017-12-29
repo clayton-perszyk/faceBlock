@@ -16,11 +16,12 @@
   },
 
   "permissions": [
-    "notifications",
     "storage",
     "tabs",
     "windows"
   ],
+
+  "optional_permissions": [ "notifications"],
 
   "options_page": "options.html"
 }
