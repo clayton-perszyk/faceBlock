@@ -11,8 +11,8 @@ function updateData() {
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs) {
     tab = tabs[0];
     site = ('lm-' + getDomain(tab.url));
-    chrome.storage.sync.get(site, function(items) {
 
+    chrome.storage.sync.get(site, function(items) {
       if (items[site]) {
         currentDate = new Date().toDateString();
         storedDate = items[site].date;
@@ -58,6 +58,9 @@ chrome.tabs.onActivated.addListener(function() {
   updateData();
 });
 
-chrome.windows.onFocusChanged.addListener(function() {
-  updateData();
+chrome.windows.onFocusChanged.addListener(function(browserWindow) {
+  console.log(browserWindow);
+  if (browserWindow != chrome.windows.WINDOW_ID_NONE) {
+    updateData();
+  }
 });
