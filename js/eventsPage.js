@@ -17,8 +17,6 @@ function updateData() {
         currentDate = new Date().toDateString();
         storedDate = items[site].date;
 
-        console.log(items[site])
-
         if (currentDate === storedDate) {
           items[site].views++;
           updatedStorage[site] = {limit: items[site].limit, views: items[site].views, icon: items[site].icon, date: items[site].date};
@@ -34,8 +32,8 @@ function updateData() {
               iconUrl: "../temp_logo.png"
             };
 
-            chrome.notifications.create("upadted site views", notificationOptions, function(notificationId) {
-              chrome.notifications.clear(notificationId); 
+            chrome.notifications.create("updated site views", notificationOptions, function(notificationId) {
+              chrome.notifications.clear(notificationId);
             });
           }
         } else {
@@ -57,5 +55,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 });
 
 chrome.tabs.onActivated.addListener(function(object, activeInfo) {
+  updateData();
+});
+
+chrome.windows.onFocusChanged.addListener(function(window) {
+  console.log(window)
   updateData();
 });
