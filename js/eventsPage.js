@@ -1,3 +1,17 @@
+function showNotification(items, site, tab) {
+  notificationOptions = {
+    type: "basic",
+    title: "Views updated!",
+    message: "you have " + (items[site].limit - items[site].views)+ " views left today for " + getDomain(tab.url) + ".",
+    iconUrl: "../temp_logo.png",
+    buttons: [{title: "Disable Notifications"}]
+  };
+
+  chrome.notifications.create("updated site views", notificationOptions, function(notificationId) {
+    chrome.notifications.clear(notificationId);
+  });
+}
+
 function updateData() {
   let tab,
       site,
@@ -23,27 +37,19 @@ function updateData() {
           chrome.storage.sync.set(updatedStorage);
 
           if (items[site].views >= items[site].limit) {
-            // alert("reached yo limit");
+            alert("reached yo limit");
           } else {
             chrome.permissions.contains({ permissions: ['notifications']}, function(result) {
                 if (result) {
-                  notificationOptions = {
-                    type: "basic",
-                    title: "Views updated!",
-                    message: "you have " + (items[site].limit - items[site].views)+ " views left today for " + getDomain(tab.url) + ".",
-                    iconUrl: "../temp_logo.png",
-                    buttons: [{title: "Disable Notifications"}]
-                  };
-
-                  chrome.notifications.create("updated site views", notificationOptions, function(notificationId) {
-                    chrome.notifications.clear(notificationId);
-                  });
+                  showNotification(items, site, tab);
                 }
             });
 
           }
         } else {
           updatedStorage[site] = {limit: items[site].limit, views: 0, icon: items[site].icon, date: new Date().toDateString()};
+          chrome.storage.sync.set(updatedStorage);
+          showNotification(items, site, tab);
         }
       }
     });
