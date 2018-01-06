@@ -15,10 +15,18 @@
     "persistent": false
   },
 
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/libraries/jquery-3.2.1.min.js", "js/content_script.js"]
+    }
+  ],
+
   "permissions": [
     "storage",
     "tabs",
-    "windows"
+    "windows",
+    "<all_urls>"
   ],
 
   "optional_permissions": [ "notifications"],

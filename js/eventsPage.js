@@ -37,7 +37,7 @@ function updateData() {
           chrome.storage.sync.set(updatedStorage);
 
           if (items[site].views >= items[site].limit) {
-            alert("reached yo limit");
+            chrome.tabs.sendMessage(tabs[0].id, {action: "showOverlay"}, function(){});
           } else {
             chrome.permissions.contains({ permissions: ['notifications']}, function(result) {
                 if (result) {
