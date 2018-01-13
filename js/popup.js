@@ -18,6 +18,9 @@ $(document).ready(function(){
 
     chrome.storage.sync.get(site, function(items) {;
       if (items[site]) {
+        $('#views').text(items[site].views);
+        $('#get-limit').text(items[site].limit);
+        console.log($("#limit").val());
         $main.hide();
         $secondary.show();
       } else {
@@ -27,7 +30,7 @@ $(document).ready(function(){
     });
 
     $('#save').on('click', function() {
-      limit = parseInt($('#limit').val());
+      limit = parseInt($('#set-limit').val());
       icon = tab.favIconUrl;
       storageObj = {};
       storageObj[site] = {limit: limit, views: 0, icon: icon, date: new Date().toDateString()};
