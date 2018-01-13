@@ -32,13 +32,14 @@ function updateData() {
         storedDate = items[site].date;
 
         if (currentDate === storedDate) {
-          items[site].views++;
-          updatedStorage[site] = {limit: items[site].limit, views: items[site].views, icon: items[site].icon, date: items[site].date};
-          chrome.storage.sync.set(updatedStorage);
 
           if (items[site].views >= items[site].limit) {
             chrome.tabs.sendMessage(tabs[0].id, {action: "showOverlay"}, function(){});
           } else {
+            items[site].views++;
+            updatedStorage[site] = {limit: items[site].limit, views: items[site].views, icon: items[site].icon, date: items[site].date};
+            chrome.storage.sync.set(updatedStorage);
+
             chrome.permissions.contains({ permissions: ['notifications']}, function(result) {
                 if (result) {
                   showNotification(items, site, tab);

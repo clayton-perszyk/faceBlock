@@ -1,3 +1,18 @@
+function togglePages(page1, page2, site) {
+  chrome.storage.sync.get(site, function(items) {
+    if (items[site]) {
+      $('#views').text(items[site].views);
+      $('#get-limit').text(items[site].limit);
+      page1.hide();
+      page2.show();
+    } else {
+      page2.hide();
+      page1.show();
+    }
+  });
+}
+
+
 $(document).ready(function(){
   let tab,
       site,
@@ -16,27 +31,15 @@ $(document).ready(function(){
     tab = tabs[0];
     site = ('lm-' + getDomain(tab.url));
 
-    chrome.storage.sync.get(site, function(items) {;
-      if (items[site]) {
-        $('#views').text(items[site].views);
-        $('#get-limit').text(items[site].limit);
-        console.log($("#limit").val());
-        $main.hide();
-        $secondary.show();
-      } else {
-        $secondary.hide();
-        $main.show();
-      }
-    });
+    togglePages($main, $secondary, site);
 
     $('#save').on('click', function() {
       limit = parseInt($('#set-limit').val());
       icon = tab.favIconUrl;
       storageObj = {};
-      storageObj[site] = {limit: limit, views: 0, icon: icon, date: new Date().toDateString()};
+      storageObj[site] = {limit: limit, views: 1, icon: icon, date: new Date().toDateString()};
       chrome.storage.sync.set(storageObj);
-      $main.hide();
-      $secondary.show();
+      togglePages($main, $secondary, site);
     });
   });
 });
