@@ -1,0 +1,23 @@
+#my-limit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+#my-limit-content {
+  background: white;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: auto;
+  padding:25px;
+}
+
+#my-limit-text {
+  text-align: center;
+}
