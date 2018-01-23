@@ -1,6 +1,7 @@
-$(document).ready(function(){
+$(document).ready(function() {
   chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === "showOverlay") {
+    let overlay = $("#my-limit-overlay");
+    if (request.action === "showOverlay" && overlay.length === 0) {
       $("body").prepend(
         `<div id="my-limit-overlay">
           <div id="my-limit-content">
@@ -16,7 +17,6 @@ $(document).ready(function(){
           e.stopPropagation();
         },
         "keydown": function(e) {
-          console.log("asdfkllk");
           if (e.target.id == 'el') return;
           e.preventDefault();
           e.stopPropagation();
