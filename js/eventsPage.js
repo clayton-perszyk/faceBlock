@@ -34,7 +34,7 @@ function updateData() {
         if (currentDate === storedDate) {
 
           if (items[site].views >= items[site].limit) {
-            chrome.tabs.sendMessage(tabs[0].id, {action: "showOverlay"}, function(){});
+            chrome.tabs.sendMessage(tabs[0].id, {action: "showOverlay", displaySite: tab.url}, function(){});
           } else {
             items[site].views++;
             updatedStorage[site] = {limit: items[site].limit, views: items[site].views, icon: items[site].icon, date: items[site].date};

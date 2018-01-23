@@ -4,7 +4,7 @@ $(document).ready(function(){
       $("body").prepend(
         `<div id="my-limit-overlay">
           <div id="my-limit-content">
-            <p id="my-limit-text">You Have reached your limit for facebook.com</p>
+            <p id="my-limit-text">You have reached your daily limit for ${getDomain(request.displaySite)}</p>
           </div>
         </div>`
       );
