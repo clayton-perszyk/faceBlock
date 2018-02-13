@@ -48,7 +48,7 @@ function updateData() {
 
           }
         } else {
-          updatedStorage[site] = {limit: items[site].limit, views: 0, icon: items[site].icon, date: new Date().toDateString()};
+          updatedStorage[site] = {limit: items[site].limit, views: 1, icon: items[site].icon, date: new Date().toDateString()};
           chrome.storage.sync.set(updatedStorage);
           showNotification(items, site, tab);
         }

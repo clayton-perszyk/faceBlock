@@ -10,15 +10,17 @@
   </head>
   <body>
     <div id="primary-content" style="display: none;">
-      <p>
-        I want to limit my visits to facebook to
+      <p class="limit-text">
+        I want to limit my visits to <span class="site-name"></span> to
         <input id="set-limit" type="text" name="visits" value="3">
         times per day.
       </p>
-      <button type="button" name="save" id="save">Save</button>
+      <div id="save">
+        <button type="button" name="save">Save</button>
+      </div>
     </div>
     <div id="secondary-content" style="display: none;">
-      <p>You have visited facebook <span id="views"></span> of <span id="get-limit"></span> times today.</p>
+      <p class="limit-text">You have visited <span class="site-name"></span> <span id="views"></span> of <span id="get-limit"></span> times today.</p>
     </div>
   </body>
 </html>

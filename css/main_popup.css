@@ -5,3 +5,11 @@
 #content {
   width: 300px;
 }
+
+.limit-text {
+  text-align: center;
+}
+
+#save {
+  text-align: center;
+}
